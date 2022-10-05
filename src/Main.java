@@ -8,20 +8,29 @@ public class Main {
         System.out.println("Numero de tarefas: " + numTarefas);
         System.out.println("Tarefas por processador: " + tarefasPorProcessador);
 
-        final int min = 15;
-        final int max = 28;
+        Matrix A = new Matrix();
+        Matrix B = new Matrix();
 
-        String SEP = ", ";
-        System.out.println("N" + SEP + "Tamanho da Sequencia" + SEP + "Tempo Sequencial" + SEP + "Tempo Paralelo" + SEP + "Razao entre os Tempos");
+        for (int i = 0; i < numTarefas; i++){
+            double linesA = A.getLines();
+            double columnsB = A.getColumns();
+            double totalElementsC = linesA * columnsB;
 
-        for (int N = min; N <= max; N++) {
-            long tamSequencia = (long) Math.pow(2, N);
-            long T_exec_sequencial = execute_sequencial(tamSequencia);
-            long T_exec_paralelo = execute_paralelo(tamSequencia, numTarefas);
-            double razao = (double) exec_sequencial / T_exec_paralelo;
+            double matrixLength = (numTarefas - 1 == i) ? Math.ceil(totalElementsC / numTarefas) : Math.floor(totalElementsC / numTarefas);
+            int[][] matrix = new int[(int) matrixLength][];
+            //ajustar lógica para atribuição das linhasXcolunas ao array
+            for(int j = 0; j < matrix.length; j++){
+                int[] lineXcolumn = new int[2];
 
-            System.out.println(N + SEP + tamSequencia + SEP + T_exec_sequencial + SEP +
-                    T_exec_paralelo + SEP + razao);
+                lineXcolumn[0] = i;
+                lineXcolumn[1] = j;
+
+                matrix[j] = lineXcolumn;
+            }
         }
+    }
+
+    public static int[][] multiplyMatrix(){
+
     }
 }
