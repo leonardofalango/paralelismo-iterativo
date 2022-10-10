@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class WriteFile {
     public static void WriteFilePath(String caminho, String texto) {
@@ -16,26 +17,38 @@ public class WriteFile {
         }
     }
 
-    public static double[][] ReadFile(String name) throws Exception {
+    public static double[][] ReadFile(String name, int linha, int coluna) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader(name));
-        ArrayList<Integer> lista = new ArrayList<Integer>();
-        String linha = br.readLine();
+        Scanner scanner = new Scanner(new FileReader("C:\\Users\\leonardo.falango\\Desktop\\leonardo falango\\paralelismo-iterativo\\MatrixA.txt"));
 
-        int i = 0;
+        double matrix[][] = new double[linha][coluna];
         int j = 0;
+        int i = 0;
 
-        for (String linhaMatrix : linha.split("\n"))for (String numero : linhaMatrix.split(" "))j += 1;i += 1;
-
-        double matrix[][] = new double[i][j];
-        i = 0;
-        j = 0;
-
-        for (String linhaMatrix : linha.split("\n")) {
-            for (String numero : linhaMatrix.split(" ")) {
-                matrix[i][j] = Double.valueOf(numero);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            j = 0;
+            for (String numero : line.split(" ")) {
+                matrix[i][j] = Double.parseDouble(numero);
                 j += 1;
             }
             i += 1;
+        }
+
+        return matrix;
+    }
+
+    public static Matrix test(String name) throws FileNotFoundException {
+        BufferedReader br = new BufferedReader(new FileReader(name));
+        Scanner scanner = new Scanner(new FileReader("C:\\Users\\leonardo.falango\\Desktop\\leonardo falango\\paralelismo-iterativo\\MatrixA.txt"));
+
+        Matrix matrix = new Matrix(3,3);
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            for (String numero : line.split(" ")) {
+                matrix.add(Double.parseDouble(numero));
+            }
         }
 
         return matrix;
