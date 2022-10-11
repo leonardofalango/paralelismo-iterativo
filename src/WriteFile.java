@@ -17,16 +17,30 @@ public class WriteFile {
         }
     }
 
-    public static double[][] ReadFile(String name, int linha, int coluna) throws Exception {
+    public static double[][] ReadFile(String name) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader(name));
         Scanner scanner = new Scanner(new FileReader("C:\\Users\\leonardo.falango\\Desktop\\leonardo falango\\paralelismo-iterativo\\MatrixA.txt"));
 
-        double matrix[][] = new double[linha][coluna];
         int j = 0;
         int i = 0;
 
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
+            j = 0;
+            for (String numero : line.split(" ")) {
+                j += 1;
+            }
+            i += 1;
+        }
+
+
+        double matrix[][] = new double[i][j];
+
+        Scanner scanner1 = new Scanner(new FileReader("C:\\Users\\leonardo.falango\\Desktop\\leonardo falango\\paralelismo-iterativo\\MatrixA.txt"));
+
+        j = 0; i = 0;
+        while (scanner1.hasNextLine()) {
+            String line = scanner1.nextLine();
             j = 0;
             for (String numero : line.split(" ")) {
                 matrix[i][j] = Double.parseDouble(numero);
@@ -38,20 +52,5 @@ public class WriteFile {
         return matrix;
     }
 
-    public static Matrix test(String name) throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader(name));
-        Scanner scanner = new Scanner(new FileReader("C:\\Users\\leonardo.falango\\Desktop\\leonardo falango\\paralelismo-iterativo\\MatrixA.txt"));
-
-        Matrix matrix = new Matrix(3,3);
-
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            for (String numero : line.split(" ")) {
-                matrix.add(Double.parseDouble(numero));
-            }
-        }
-
-        return matrix;
-    }
 
 }
