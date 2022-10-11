@@ -19,7 +19,7 @@ public class WriteFile {
 
     public static double[][] ReadFile(String name) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader(name));
-        Scanner scanner = new Scanner(new FileReader("C:\\Users\\leonardo.falango\\Desktop\\leonardo falango\\paralelismo-iterativo\\MatrixA.txt"));
+        Scanner scanner = new Scanner(new FileReader(name));
 
         int j = 0;
         int i = 0;
@@ -36,8 +36,7 @@ public class WriteFile {
 
         double matrix[][] = new double[i][j];
 
-        Scanner scanner1 = new Scanner(new FileReader("C:\\Users\\leonardo.falango\\Desktop\\leonardo falango\\paralelismo-iterativo\\MatrixA.txt"));
-
+        Scanner scanner1 = new Scanner(new FileReader(name));
         j = 0; i = 0;
         while (scanner1.hasNextLine()) {
             String line = scanner1.nextLine();
