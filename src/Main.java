@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) throws Exception {
         final int tarefasPorProcessador = 1;
@@ -15,31 +17,32 @@ public class Main {
         Matrix matrix_A = new Matrix(matrixA);
         Matrix matrix_B = new Matrix(matrixB);
 
-        double[] threadTasks = new double[numTarefas];
+        double[][] threadTasks = generateTaskList(numTarefas, matrixA, matrixB);
+
+        System.out.println(Arrays.deepToString(threadTasks));
+    }
+
+    public static double[][] generateTaskList(int numTarefas, double[][] matrixA, double[][] matrixB){
         int totalElementsC = matrixA.length * matrixB[0].length;
+        double[][] threadTasks = new double[numTarefas][(int) ((totalElementsC % numTarefas != 0) ? Math.floor(totalElementsC / numTarefas) + 1 : Math.floor(totalElementsC / numTarefas))];
+
+        int count = 0;
+        int addToNext = 0;
 
         for(int i = 0; i < numTarefas; i++) {
-            threadTasks[i] = (numTarefas - 1 == i) ? Math.ceil(totalElementsC / numTarefas) : Math.floor(totalElementsC / numTarefas);
-        }
+            double limit = (addToNext > 0) ? Math.floor(totalElementsC / numTarefas) + addToNext : Math.floor(totalElementsC / numTarefas);
+            addToNext = 0;
 
+            if (totalElementsC % numTarefas != 0){
+                addToNext++;
+            }
 
-
-    }
-
-    public static double[] generateMatrixList(double[][] A, double[][] B){
-
-        return new double[0];
-    }
-
-    public static void multiplyMatrix(double[][] A, double[][] B) {
-        double[][] C = new double[A.length][B[0].length];
-
-        for (int i = 0; i < C.length; i++) {
-            for (int j = 0; j < C[i].length; j++) {
-                for (int k = 0; k < A[i].length; k++) {
-                    C[i][j] += A[i][k] * B[k][j];
-                }
+            for(int j = 0; j < limit; j++){
+                threadTasks[i][j] = count;
+                count++;
             }
         }
+
+        return threadTasks;
     }
 }
