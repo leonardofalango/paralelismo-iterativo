@@ -1,5 +1,5 @@
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         final int tarefasPorProcessador = 1;
         final int totalProcessadores = Runtime.getRuntime().availableProcessors();
         final int numTarefas = (tarefasPorProcessador) * totalProcessadores;
@@ -8,29 +8,34 @@ public class Main {
         System.out.println("Numero de tarefas: " + numTarefas);
         System.out.println("Tarefas por processador: " + tarefasPorProcessador);
 
-        Matrix A = new Matrix();
-        Matrix B = new Matrix();
+        WriteFile.WriteFilePath("../MatrixA.txt", "notextallowed");
+        double A[][] = WriteFile.ReadFile("MatrixA.txt");
+        double B[][] = WriteFile.ReadFile("MatrixB.txt");
 
-        for (int i = 0; i < numTarefas; i++){
-            double linesA = A.getLines();
-            double columnsB = A.getColumns();
-            double totalElementsC = linesA * columnsB;
+        double[] threadTasks = new double[numTarefas];
+        int totalElementsC = A.length * B.getColuna(0);
 
-            double matrixLength = (numTarefas - 1 == i) ? Math.ceil(totalElementsC / numTarefas) : Math.floor(totalElementsC / numTarefas);
-            int[][] matrix = new int[(int) matrixLength][];
-            //ajustar lógica para atribuição das linhasXcolunas ao array
-            for(int j = 0; j < matrix.length; j++){
-                int[] lineXcolumn = new int[2];
-
-                lineXcolumn[0] = i;
-                lineXcolumn[1] = j;
-
-                matrix[j] = lineXcolumn;
-            }
+        for(int i = 0; i < numTarefas; i++) {
+            threadTasks[i] = (numTarefas - 1 == i) ? Math.ceil(totalElementsC / numTarefas) : Math.floor(totalElementsC / numTarefas);
         }
+
+
+
     }
 
-    public static int[][] multiplyMatrix(){
+    public static double[] generateMatrixList(double[][] A, double[][] B){
 
+    }
+
+    public static void multiplyMatrix(double[][] A, double[][] B) {
+        double[][] C = new double[A.length][B[0].length];
+
+        for (int i = 0; i < C.length; i++) {
+            for (int j = 0; j < C[i].length; j++) {
+                for (int k = 0; k < A[i].length; k++) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
     }
 }
