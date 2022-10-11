@@ -8,12 +8,15 @@ public class Main {
         System.out.println("Numero de tarefas: " + numTarefas);
         System.out.println("Tarefas por processador: " + tarefasPorProcessador);
 
-        WriteFile.WriteFilePath("../MatrixA.txt", "notextallowed");
-        double A[][] = WriteFile.ReadFile("MatrixA.txt");
-        double B[][] = WriteFile.ReadFile("MatrixB.txt");
+
+        double[][] matrixA = WriteFile.ReadFile("MatrixA.txt");
+        double[][] matrixB = WriteFile.ReadFile("MatrixB.txt");
+
+        Matrix matrix_A = new Matrix(matrixA);
+        Matrix matrix_B = new Matrix(matrixB);
 
         double[] threadTasks = new double[numTarefas];
-        int totalElementsC = A.length * B.getColuna(0);
+        int totalElementsC = matrixA.length * matrixB[0].length;
 
         for(int i = 0; i < numTarefas; i++) {
             threadTasks[i] = (numTarefas - 1 == i) ? Math.ceil(totalElementsC / numTarefas) : Math.floor(totalElementsC / numTarefas);
@@ -25,6 +28,7 @@ public class Main {
 
     public static double[] generateMatrixList(double[][] A, double[][] B){
 
+        return new double[0];
     }
 
     public static void multiplyMatrix(double[][] A, double[][] B) {
