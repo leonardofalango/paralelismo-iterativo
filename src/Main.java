@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.concurrent.Semaphore;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -14,12 +15,22 @@ public class Main {
         double[][] matrixA = WriteFile.ReadFile("MatrixA.txt");
         double[][] matrixB = WriteFile.ReadFile("MatrixB.txt");
 
-        Matrix matrix_A = new Matrix(matrixA);
-        Matrix matrix_B = new Matrix(matrixB);
-
         double[][] threadTasks = generateTaskList(numTarefas, matrixA, matrixB);
 
-        System.out.println(Arrays.deepToString(threadTasks));
+        double[][] matrixC = new double[matrixA.length][matrixB[0].length];
+        Semaphore mutex = new Semaphore(1);
+
+        for(int i = 0; i < threadTasks.length; i++){
+            MatrixMultiply multiply = new MatrixMultiply(matrixA, matrixB, matrixC, threadTasks[i], mutex);
+            multiply.start();
+
+            if(i == threadTasks.length - 1){
+                multiply.join();
+            }
+        }
+
+        System.out.println(Arrays.deepToString(matrixC));
+
     }
 
     public static double[][] generateTaskList(int numTarefas, double[][] matrixA, double[][] matrixB){
