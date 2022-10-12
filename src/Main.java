@@ -15,6 +15,13 @@ public class Main {
         double[][] matrixA = WriteFile.ReadFile("MatrixA.txt");
         double[][] matrixB = WriteFile.ReadFile("MatrixB.txt");
 
+        double[][] matrixC = multiplyMatrixByThread(matrixA, matrixB, numTarefas);
+
+        System.out.println(Arrays.deepToString(matrixC));
+
+    }
+
+    public static double[][] multiplyMatrixByThread(double[][] matrixA, double[][] matrixB, int numTarefas) throws InterruptedException {
         double[][] threadTasks = generateTaskList(numTarefas, matrixA, matrixB);
 
         double[][] matrixC = new double[matrixA.length][matrixB[0].length];
@@ -29,8 +36,7 @@ public class Main {
             }
         }
 
-        System.out.println(Arrays.deepToString(matrixC));
-
+        return matrixC;
     }
 
     public static double[][] generateTaskList(int numTarefas, double[][] matrixA, double[][] matrixB){
