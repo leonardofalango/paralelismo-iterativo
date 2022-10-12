@@ -3,22 +3,33 @@ import java.util.concurrent.Semaphore;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        final int tarefasPorProcessador = 1;
-        final int totalProcessadores = Runtime.getRuntime().availableProcessors();
-        final int numTarefas = (tarefasPorProcessador) * totalProcessadores;
+         int tarefasPorProcessador = 1;
+         int totalProcessadores = Runtime.getRuntime().availableProcessors();
+         int numTarefas = (tarefasPorProcessador) * totalProcessadores;
 
-        System.out.println("Total de processadores: " + totalProcessadores);
+        System.out.println("\nTotal de processadores: " + totalProcessadores);
         System.out.println("Numero de tarefas: " + numTarefas);
         System.out.println("Tarefas por processador: " + tarefasPorProcessador);
 
+        //Exemplo 1
+        runMatrixExample(1, totalProcessadores, numTarefas, "MatrixA.txt", "MatrixB.txt");
 
-        double[][] matrixA = WriteFile.ReadFile("MatrixA.txt");
-        double[][] matrixB = WriteFile.ReadFile("MatrixB.txt");
+        //Exemplo 2
+        runMatrixExample(2, 6, numTarefas, "MatrixA.txt", "MatrixB.txt");
+
+    }
+
+    public static void runMatrixExample(int example, int totalProcessadores, int numTarefas, String file1, String file2) throws Exception {
+        System.out.println("\nMatriz " + example + ": ");
+        double[][] matrixA = WriteFile.ReadFile(file1);
+        double[][] matrixB = WriteFile.ReadFile(file2);
+
+        System.out.println("Total de processadores: " + totalProcessadores);
+        System.out.println("Tamanho da matriz: " + matrixA.length + "x" + matrixB[0].length);
 
         double[][] matrixC = multiplyMatrixByThread(matrixA, matrixB, numTarefas);
 
         System.out.println(Arrays.deepToString(matrixC));
-
     }
 
     public static double[][] multiplyMatrixByThread(double[][] matrixA, double[][] matrixB, int numTarefas) throws InterruptedException {
@@ -27,6 +38,7 @@ public class Main {
         double[][] matrixC = new double[matrixA.length][matrixB[0].length];
         Semaphore mutex = new Semaphore(1);
 
+        long t0 = System.currentTimeMillis();
         for(int i = 0; i < threadTasks.length; i++){
             MatrixMultiply multiply = new MatrixMultiply(matrixA, matrixB, matrixC, threadTasks[i], mutex);
             multiply.start();
@@ -35,7 +47,9 @@ public class Main {
                 multiply.join();
             }
         }
+        long t1 = System.currentTimeMillis();
 
+        System.out.println("Tempo de calculo: " + (t1 - t0) + "ms");
         return matrixC;
     }
 
