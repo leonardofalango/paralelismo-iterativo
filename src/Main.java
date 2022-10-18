@@ -13,26 +13,35 @@ public class Main {
 
         //Exemplo 1
         for (int i=0; i<50; i++){
-            runMatrixExample(1, 8, numTarefas, "matrixa.txt", "matrixe.txt");
-            runMatrixExample(1, 8, numTarefas, "matrixb.txt", "matrixf.txt");
-            runMatrixExample(1, 8, numTarefas, "matrixh.txt", "matrixc.txt");
-            runMatrixExample(1, 8, numTarefas, "matrix8.txt", "matrix4.txt");
+            runMatrixExample(1, totalProcessadores, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(1, totalProcessadores, numTarefas, "matrixb.txt", "matrixf.txt");
+            runMatrixExample(1, totalProcessadores, numTarefas, "matrixh.txt", "matrixc.txt");
+            runMatrixExample(1, totalProcessadores, numTarefas, "matrix8.txt", "matrix4.txt");
         }
 
         //Exemplo 2
         for (int i=0; i<50; i++){
             runMatrixExample(2, 1, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 2, numTarefas, "matrixa.txt", "matrixe.txt");            runMatrixExample(2, 1, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 3, numTarefas, "matrixa.txt", "matrixe.txt");
             runMatrixExample(2, 4, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 5, numTarefas, "matrixa.txt", "matrixe.txt");
             runMatrixExample(2, 6, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 7, numTarefas, "matrixa.txt", "matrixe.txt");
             runMatrixExample(2, 8, numTarefas, "matrixa.txt", "matrixe.txt");
         }
 
         //Calcular o speedup e a eficiencia
         for (int i=0; i<50; i++){
             runMatrixExample(2, 1, numTarefas, "matrixa.txt", "matrixe.txt");
-            runMatrixExample(2, 4, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 2, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 3, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 4, numTarefas, "matrixa.txt", "matrixe.txt");            runMatrixExample(2, 1, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 5, numTarefas, "matrixa.txt", "matrixe.txt");
             runMatrixExample(2, 6, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 7, numTarefas, "matrixa.txt", "matrixe.txt");
             runMatrixExample(2, 8, numTarefas, "matrixa.txt", "matrixe.txt");
+
         }
     }
 
