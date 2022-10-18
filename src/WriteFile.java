@@ -4,17 +4,18 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class WriteFile {
-    public static void WriteFilePath(String caminho, String texto) {
-        try (
-            FileWriter fileWriter = new FileWriter(caminho, false);
-            BufferedWriter buffer = new BufferedWriter(fileWriter);
-            PrintWriter pw = new PrintWriter(buffer))
-        {
-            pw.append(texto);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+    public static void writeMatrix(String filename, double[][] matrix) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
+
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    bw.write(matrix[i][j] + ",");
+                }
+                bw.newLine();
+            }
+            bw.flush();
+        } catch (IOException e) {}
     }
 
     public static double[][] ReadFile(String name) throws Exception {

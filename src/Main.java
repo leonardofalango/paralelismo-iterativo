@@ -12,7 +12,7 @@ public class Main {
         System.out.println("Tarefas por processador: " + tarefasPorProcessador);
 
         //Exemplo 1
-        runMatrixExample(1, 2, numTarefas, "MatrixB.txt", "Matrixf.txt");
+        runMatrixExample(1, 8, numTarefas, "matrixa.txt", "matrixe.txt");
 
         //Exemplo 2
         //runMatrixExample(2, 6, numTarefas, "MatrixA.txt", "MatrixB.txt");
@@ -21,13 +21,22 @@ public class Main {
 
     public static void runMatrixExample(int example, int totalProcessadores, int numTarefas, String file1, String file2) throws Exception {
         System.out.println("\nMatriz " + example + ": ");
+
+        long inicio = System.currentTimeMillis();
         double[][] matrixA = WriteFile.ReadFile(file1);
         double[][] matrixB = WriteFile.ReadFile(file2);
+        long tempo = System.currentTimeMillis() - inicio;
+        System.out.println("Tempo para leitura das matrizes: " + tempo);
 
         System.out.println("Total de processadores: " + totalProcessadores);
         System.out.println("Tamanho da matriz: " + matrixA.length + "x" + matrixB[0].length);
 
         double[][] matrixC = multiplyMatrixByThread(matrixA, matrixB, numTarefas);
+
+        inicio = System.currentTimeMillis();
+        WriteFile.writeMatrix("matrix.txt", matrixC);
+        tempo = System.currentTimeMillis() - inicio;
+        System.out.println("Tempo para a escrita da matriz: " + tempo);
 
         //System.out.println(Arrays.deepToString(matrixC));
     }
