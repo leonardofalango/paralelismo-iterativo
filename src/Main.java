@@ -12,10 +12,10 @@ public class Main {
         System.out.println("Tarefas por processador: " + tarefasPorProcessador);
 
         //Exemplo 1
-        runMatrixExample(1, totalProcessadores, numTarefas, "MatrixA.txt", "MatrixB.txt");
+        runMatrixExample(1, 2, numTarefas, "MatrixB.txt", "Matrixf.txt");
 
         //Exemplo 2
-        runMatrixExample(2, 6, numTarefas, "MatrixA.txt", "MatrixB.txt");
+        //runMatrixExample(2, 6, numTarefas, "MatrixA.txt", "MatrixB.txt");
 
     }
 
@@ -29,7 +29,7 @@ public class Main {
 
         double[][] matrixC = multiplyMatrixByThread(matrixA, matrixB, numTarefas);
 
-        System.out.println(Arrays.deepToString(matrixC));
+        //System.out.println(Arrays.deepToString(matrixC));
     }
 
     public static double[][] multiplyMatrixByThread(double[][] matrixA, double[][] matrixB, int numTarefas) throws InterruptedException {
