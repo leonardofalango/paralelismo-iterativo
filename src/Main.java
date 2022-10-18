@@ -12,11 +12,28 @@ public class Main {
         System.out.println("Tarefas por processador: " + tarefasPorProcessador);
 
         //Exemplo 1
-        runMatrixExample(1, 8, numTarefas, "matrixa.txt", "matrixe.txt");
+        for (int i=0; i<50; i++){
+            runMatrixExample(1, 8, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(1, 8, numTarefas, "matrixb.txt", "matrixf.txt");
+            runMatrixExample(1, 8, numTarefas, "matrixh.txt", "matrixc.txt");
+            runMatrixExample(1, 8, numTarefas, "matrix8.txt", "matrix4.txt");
+        }
 
         //Exemplo 2
-        //runMatrixExample(2, 6, numTarefas, "MatrixA.txt", "MatrixB.txt");
+        for (int i=0; i<50; i++){
+            runMatrixExample(2, 1, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 4, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 6, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 8, numTarefas, "matrixa.txt", "matrixe.txt");
+        }
 
+        //Calcular o speedup e a eficiencia
+        for (int i=0; i<50; i++){
+            runMatrixExample(2, 1, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 4, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 6, numTarefas, "matrixa.txt", "matrixe.txt");
+            runMatrixExample(2, 8, numTarefas, "matrixa.txt", "matrixe.txt");
+        }
     }
 
     public static void runMatrixExample(int example, int totalProcessadores, int numTarefas, String file1, String file2) throws Exception {
